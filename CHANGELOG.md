@@ -1,13 +1,10 @@
-## [project-title] Changelog
+# Change Log
 
-<a name="x.y.z"></a>
-# x.y.z (yyyy-mm-dd)
+## [0.0.1] - 2025-01-30
 
-*Features*
-* ...
+### Added
+- Initial commit
 
-*Bug Fixes*
-* ...
+### Changed
 
-*Breaking Changes*
-* ...
+## Fixed

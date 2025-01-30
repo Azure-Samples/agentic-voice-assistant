@@ -1,0 +1,6 @@
+{
+    "$connections": {
+        "type": "Object",
+        "defaultValue": {}
+    }
+}

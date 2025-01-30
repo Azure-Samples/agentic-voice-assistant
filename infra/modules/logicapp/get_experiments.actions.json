@@ -1,0 +1,28 @@
+{
+    "Get_all_documents_(V3)": {
+        "runAfter": {},
+        "type": "ApiConnection",
+        "inputs": {
+            "host": {
+                "connection": {
+                    "name": "@parameters('$connections')['experiments']['connectionId']"
+                }
+            },
+            "method": "get",
+            "path": "/v2/cosmosdb/@{encodeURIComponent(parameters('dbAccountName'))}/dbs/@{encodeURIComponent('callcenter')}/colls/@{encodeURIComponent('experiments')}/docs"
+        }
+    },
+    "Response": {
+        "runAfter": {
+            "Get_all_documents_(V3)": [
+                "Succeeded"
+            ]
+        },
+        "type": "Response",
+        "kind": "Http",
+        "inputs": {
+            "statusCode": 200,
+            "body": "@body('Get_all_documents_(V3)')?['Documents']"
+        }
+    }
+}

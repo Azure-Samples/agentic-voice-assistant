@@ -1,0 +1,10 @@
+{
+    "$connections": {
+        "type": "Object",
+        "defaultValue": {}
+    },
+    "dbAccountName": {
+        "type": "string",
+        "defaultValue": ""
+    }
+}

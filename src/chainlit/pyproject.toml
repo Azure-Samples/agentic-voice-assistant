@@ -1,0 +1,17 @@
+[project]
+name = "pharma-lab-assistant"
+version = "0.1.0"
+description = "A voice based agentic assistant designed for environments with no access to touch screens or keyboards"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "azure-identity==1.19.0",
+    "python-dotenv==1.0.1",
+    "chainlit==2.0.6",
+    "websockets==14.0",
+    "azure-search-documents==11.6.0b4",
+    "azure-storage-blob==12.23.1",
+    "rich==13.9.4",
+    "invoke==2.2.0",
+    "numpy>=2.2.2",
+]

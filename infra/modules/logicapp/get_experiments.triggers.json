@@ -1,0 +1,10 @@
+{
+    "When_a_HTTP_request_is_received": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+            "method": "GET"
+        },
+        "operationOptions": "EnableSchemaValidation"
+    }
+}

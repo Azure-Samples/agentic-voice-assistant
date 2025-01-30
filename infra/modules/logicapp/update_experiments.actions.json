@@ -1,0 +1,32 @@
+{
+    "Compose": {
+        "runAfter": {},
+        "type": "Compose",
+        "inputs": {
+            "id": "@{triggerBody()?['experiment']}",
+            "author": "@{triggerBody()?['author']}",
+            "results": "@{triggerBody()?['results']}"
+        }
+    },
+    "Create_or_update_document_(V3)": {
+        "runAfter": {
+            "Compose": [
+                "Succeeded"
+            ]
+        },
+        "type": "ApiConnection",
+        "inputs": {
+            "host": {
+                "connection": {
+                    "name": "@parameters('$connections')['experiments']['connectionId']"
+                }
+            },
+            "method": "post",
+            "body": "@outputs('Compose')",
+            "headers": {
+                "x-ms-documentdb-is-upsert": true
+            },
+            "path": "/v2/cosmosdb/@{encodeURIComponent(parameters('dbAccountName'))}/dbs/@{encodeURIComponent('system_of_record')}/colls/@{encodeURIComponent('experiments')}/docs"
+        }
+    }
+}

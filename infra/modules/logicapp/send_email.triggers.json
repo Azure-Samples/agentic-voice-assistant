@@ -1,0 +1,24 @@
+{
+    "When_a_HTTP_request_is_received": {
+        "type": "Request",
+        "kind": "Http",
+        "inputs": {
+            "method": "POST",
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "to": {
+                        "type": "string"
+                    },
+                    "subject": {
+                        "type": "string"
+                    },
+                    "body": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "operationOptions": "EnableSchemaValidation"
+    }
+}

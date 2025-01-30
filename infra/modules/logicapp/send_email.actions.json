@@ -1,0 +1,21 @@
+{
+  "Send_an_email_(V2)": {
+    "type": "ApiConnection",
+    "inputs": {
+      "host": {
+        "connection": {
+          "name": "@parameters('$connections')['office365']['connectionId']"
+        }
+      },
+      "method": "post",
+      "body": {
+        "To": "@triggerBody()?['to']",
+        "Subject": "@triggerBody()?['subject']",
+        "Body": "<p class=\"editor-paragraph\">@{triggerBody()?['body']}</p>",
+        "Importance": "Normal"
+      },
+      "path": "/v2/Mail"
+    },
+    "runAfter": {}
+  }
+}

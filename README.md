@@ -1,57 +1,70 @@
-# Project Name
+# Agentic Voice Assistant
 
-(short, 1-3 sentenced, description of the project)
+Picture yourself in a busy lab, wearing thick gloves, safety goggles, and a snug lab coat. You can’t tap on a screen or use a keyboard - the gloves are too thick.
 
-## Features
+Yet you need to jot down a brilliant idea to explore later, or quickly cross check the results of another experiment.
 
-This project framework provides the following features:
+![Laboratory as Imagined by Dall-E 3](./docs/images/laboratory.png "Laboratory as imagined by Dalle-E 3")
 
-* Feature 1
-* Feature 2
-* ...
+That’s where our Agentic Voice Assistant steps in. 
 
-## Getting Started
+It connects you and all your lab’s systems, from records and notes to instructions and data. Just talk, and it retrieves what you need, makes a note, updates a system or sends a reminder. 
 
-### Prerequisites
+It works alongside you on your research, keeping you efficient and safe.
 
-(ideally very short, if any)
+## How to use the demo
 
-- OS
-- Library version
-- ...
+- [Deploy the demo](#how-to-deploy)
+- Get UI Container App URL from the output of `azd up`
+- Click on recording button or press 'P'
+- Speak
 
-### Installation
+**Sample Questions**
 
-(ideally very short)
+- What are the personal protection instructions?
+- How do I keep records in the lab?
+- Give me the list of experiments.
+- Update the status of experiment 3 by James Brown to Success
+- Summarise the record keeping instructions and send them via email to "<email>"
 
-- npm install [package name]
-- mvn install
-- ...
+## How to deploy
 
-### Quickstart
-(Add steps to get up and running quickly)
+### Depenendencies
 
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
+  - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli): `az`
+  - [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview): `azd`
+  - [Python](https://www.python.org/about/gettingstarted/): `python`
+  - [UV](https://docs.astral.sh/uv/getting-started/installation/): `uv`
+  - Optionally [Docker](https://www.docker.com/get-started/): `docker` 
+
+### Deployment and setup
+
+```sh
+git clone https://github.com/Azure-Samples/agents-escalation.git
+cd agents-escalation
+azd up
+```
+
+>[NOTE!]
+>Once deployed, you need to authorise the solution to use your M365 email account for the outbound email capability.
+> [Authorise mail access](./docs/mail_authorisation.md)
 
 
-## Demo
+## Architecture
 
-A demo app is included to show how to use the project.
+![Architecture Diagram](./docs/images/architecture_v0.0.1.png)
 
-To run the demo, follow these steps:
+Because the assistant has a modular architecture and powered by Azure Logic Apps, expanding its features is simple. You can add new steps and integrations without tearing everything apart. 
 
-(Add steps to start up the demo)
+## Contributing
 
-1.
-2.
-3.
+This project welcomes contributions and suggestions. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
 
 ## Resources
 
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+- [Chainlit Documentation](https://docs.chainlit.io/)
+- [Azure OpenAI Documentation](https://docs.microsoft.com/en-us/azure/cognitive-services/openai/)
