@@ -9,7 +9,7 @@
                 }
             },
             "method": "get",
-            "path": "/v2/cosmosdb/@{encodeURIComponent(parameters('dbAccountName'))}/dbs/@{encodeURIComponent('callcenter')}/colls/@{encodeURIComponent('experiments')}/docs"
+            "path": "/v2/cosmosdb/@{encodeURIComponent(parameters('dbAccountName'))}/dbs/@{encodeURIComponent('system_of_record')}/colls/@{encodeURIComponent('experiments')}/docs"
         }
     },
     "Response": {
