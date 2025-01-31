@@ -1,5 +1,5 @@
 [project]
-name = "pharma-lab-assistant"
+name = "agentic-voice-assistant"
 version = "0.1.0"
 description = "A voice based agentic assistant designed for environments with no access to touch screens or keyboards"
 readme = "README.md"
