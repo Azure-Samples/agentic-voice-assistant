@@ -49,6 +49,9 @@ azd up
 >Once deployed, you need to authorise the solution to use your M365 email account for the outbound email capability.
 > [Authorise mail access](./docs/mail_authorisation.md)
 
+>[!NOTE]
+>AZD will also setup the local Python environment for you, using `venv` and installing the required packages.
+
 ## Architecture
 
 ![Architecture Diagram](./docs/images/architecture_v0.0.1.png)
