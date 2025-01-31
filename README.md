@@ -6,9 +6,9 @@ Yet you need to jot down a brilliant idea to explore later, or quickly cross che
 
 ![Laboratory as Imagined by Dall-E 3](./docs/images/laboratory.png "Laboratory as imagined by Dalle-E 3")
 
-That’s where our Agentic Voice Assistant steps in. 
+That’s where our Agentic Voice Assistant steps in.
 
-It connects you and all your lab’s systems, from records and notes to instructions and data. Just talk, and it retrieves what you need, makes a note, updates a system or sends a reminder. 
+It connects you and all your lab’s systems, from records and notes to instructions and data. Just talk, and it retrieves what you need, makes a note, updates a system or sends a reminder.
 
 It works alongside you on your research, keeping you efficient and safe.
 
@@ -19,24 +19,23 @@ It works alongside you on your research, keeping you efficient and safe.
 - Click on recording button or press 'P'
 - Speak
 
-**Sample Questions**
+### Sample Questions
 
 - What are the personal protection instructions?
 - How do I keep records in the lab?
 - Give me the list of experiments.
 - Update the status of experiment 3 by James Brown to Success (you can validate the record has been updated in CosmosDB experiments container)
-- Summarise the record keeping instructions and send them via email to "<email>"
-
+- Summarise the record keeping instructions and send them via email to "\<your email>"
 
 ## How to deploy
 
 ### Depenendencies
 
-  - [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli): `az`
-  - [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview): `azd`
-  - [Python](https://www.python.org/about/gettingstarted/): `python`
-  - [UV](https://docs.astral.sh/uv/getting-started/installation/): `uv`
-  - Optionally [Docker](https://www.docker.com/get-started/): `docker` 
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/what-is-azure-cli): `az`
+- [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/overview): `azd`
+- [Python](https://www.python.org/about/gettingstarted/): `python`
+- [UV](https://docs.astral.sh/uv/getting-started/installation/): `uv`
+- Optionally [Docker](https://www.docker.com/get-started/): `docker`
 
 ### Deployment and setup
 
@@ -46,16 +45,15 @@ cd agents-escalation
 azd up
 ```
 
->[NOTE!]
+>[!NOTE]
 >Once deployed, you need to authorise the solution to use your M365 email account for the outbound email capability.
 > [Authorise mail access](./docs/mail_authorisation.md)
-
 
 ## Architecture
 
 ![Architecture Diagram](./docs/images/architecture_v0.0.1.png)
 
-Because the assistant has a modular architecture and powered by Azure Logic Apps, expanding its features is simple. You can add new steps and integrations without tearing everything apart. 
+Because the assistant has a modular architecture and powered by Azure Logic Apps, expanding its features is simple. You can add new steps and integrations without tearing everything apart.
 
 ## Contributing
 
