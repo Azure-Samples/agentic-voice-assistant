@@ -40,8 +40,8 @@ It works alongside you on your research, keeping you efficient and safe.
 ### Deployment and setup
 
 ```sh
-git clone https://github.com/Azure-Samples/agents-escalation.git
-cd agents-escalation
+git clone https://github.com/Azure-Samples/agentic-voice-assistant.git
+cd agentic-voice-assistant
 azd up
 ```
 
