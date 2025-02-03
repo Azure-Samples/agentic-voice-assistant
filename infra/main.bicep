@@ -151,6 +151,8 @@ module cosmosdb 'modules/cosmos/cosmos.bicep' = {
     cosmosDbAccountName: 'cosmos${resourceToken}'
     location: location
     identityName: appIdentity.outputs.name
+    principalId: principalId
+    principalType: principalType
     tags: tags
   }
   scope: resGroup

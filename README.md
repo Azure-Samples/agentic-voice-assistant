@@ -24,7 +24,7 @@ It works alongside you on your research, keeping you efficient and safe.
 - What are the personal protection instructions?
 - How do I keep records in the lab?
 - Give me the list of experiments.
-- Update the status of experiment 3 by James Brown to Success (you can validate the record has been updated in CosmosDB experiments container)
+- Update the status of experiment 3 by James Brown to Success. You can validate the record has been updated in CosmosDB experiments container - see ![SQL Statement](./docs/sample_queries/get_experiments.sql)
 - Summarise the record keeping instructions and send them via email to "\<your email>"
 
 ## How to deploy
