@@ -7,7 +7,7 @@
             "schema": {
                 "type": "object",
                 "properties": {
-                    "experiment": {
+                    "id": {
                         "type": "string"
                     },
                     "author": {
@@ -18,7 +18,7 @@
                     }
                 },
                 "required": [
-                    "experiment",
+                    "id",
                     "author",
                     "results"
                 ]

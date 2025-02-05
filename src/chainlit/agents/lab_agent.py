@@ -27,7 +27,7 @@ lab_agent = {
 	"description": """Call this if:
 		- You need to provide infromation about the experiments and their results.
 		- You need to upodate the experiment results.
-		- When updaing experiment You MUST specify the experiment id as INTEGER, Do not include 'Experiment'
+		- When updaing experiment You MUST specify the experiment id as INTEGER, Do not include 'Experiment' in the text
   """,
 	"system_message": """
 	You are a laboratory assistant that help users working in a laboratory and conducting experiments.
