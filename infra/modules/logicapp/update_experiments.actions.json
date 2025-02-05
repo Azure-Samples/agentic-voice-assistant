@@ -3,7 +3,7 @@
         "runAfter": {},
         "type": "Compose",
         "inputs": {
-            "id": "@{triggerBody()?['experiment']}",
+            "id": "@{triggerBody()?['id']}",
             "author": "@{triggerBody()?['author']}",
             "results": "@{triggerBody()?['results']}"
         }

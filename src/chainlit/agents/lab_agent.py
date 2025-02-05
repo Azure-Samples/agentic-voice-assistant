@@ -27,6 +27,7 @@ lab_agent = {
 	"description": """Call this if:
 		- You need to provide infromation about the experiments and their results.
 		- You need to upodate the experiment results.
+		- When updaing experiment You MUST specify the experiment id as INTEGER, Do not include 'Experiment'
   """,
 	"system_message": """
 	You are a laboratory assistant that help users working in a laboratory and conducting experiments.
@@ -46,7 +47,7 @@ lab_agent = {
 			"parameters": {
 				"type": "object",
 				"properties": {
-					"experiment": {"type": "string", "description": "The experiment name."},
+					"id": {"type": "string", "description": "The experiment id."},
 					"results": {"type": "string", "description": "The experiment results."},
 					"author": {"type": "string", "description": "The author of the experiment." },
 				},
