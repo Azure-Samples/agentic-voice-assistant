@@ -8,6 +8,7 @@ from agents.root import root_assistant
 from agents.sop_agent import sop_agent
 from agents.lab_agent import lab_agent
 from agents.assistant_agent import assistant_agent
+from agents.web_search_agent import web_search_agent
 
 async def setup_openai_realtime():
     """Instantiate and configure the OpenAI Realtime Client"""
@@ -70,6 +71,7 @@ async def setup_openai_realtime():
     openai_realtime.assistant.register_agent(sop_agent)
     openai_realtime.assistant.register_agent(lab_agent)
     openai_realtime.assistant.register_agent(assistant_agent)
+    openai_realtime.assistant.register_agent(web_search_agent)
     # This method must be called last, as it will ensure every agent knows each other plus the path to the root agent
     openai_realtime.assistant.register_root_agent(root_assistant)
     
