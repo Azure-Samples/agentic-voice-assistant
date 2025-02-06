@@ -68,10 +68,10 @@ async def setup_openai_realtime():
     cl.user_session.set("openai_realtime", openai_realtime)
     
     # Agents must be registered before the root agent
+    openai_realtime.assistant.register_agent(web_search_agent)
     openai_realtime.assistant.register_agent(sop_agent)
     openai_realtime.assistant.register_agent(lab_agent)
     openai_realtime.assistant.register_agent(assistant_agent)
-    openai_realtime.assistant.register_agent(web_search_agent)
     # This method must be called last, as it will ensure every agent knows each other plus the path to the root agent
     openai_realtime.assistant.register_root_agent(root_assistant)
     
