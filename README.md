@@ -52,6 +52,12 @@ azd up
 >[!NOTE]
 >AZD will also setup the local Python environment for you, using `venv` and installing the required packages.
 
+## Local execution
+
+Once the environment has been deployed with `azd up` you can also run the aplication locally.
+
+Please follow the instructions in [the instructions in `src/chainlit`](./src/chainlit/README.md)
+
 ## Architecture
 
 ![Architecture Diagram](./docs/images/architecture_v0.0.1.png)
