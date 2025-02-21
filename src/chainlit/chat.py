@@ -7,6 +7,7 @@ from realtime2 import RealtimeClient
 from agents.root import root_assistant
 from agents.sop_agent import sop_agent
 from agents.lab_agent import lab_agent
+from agents.user_authenticator import user_authenticator
 from agents.assistant_agent import assistant_agent
 
 async def setup_openai_realtime():
@@ -69,6 +70,7 @@ async def setup_openai_realtime():
     # Agents must be registered before the root agent
     openai_realtime.assistant.register_agent(sop_agent)
     openai_realtime.assistant.register_agent(lab_agent)
+    openai_realtime.assistant.register_agent(user_authenticator)
     openai_realtime.assistant.register_agent(assistant_agent)
     # This method must be called last, as it will ensure every agent knows each other plus the path to the root agent
     openai_realtime.assistant.register_root_agent(root_assistant)

@@ -180,6 +180,9 @@ class RealtimeConversation:
         'response.text.delta': lambda self, event: self._process_text_delta(event),
         'response.function_call_arguments.delta': lambda self, event: self._process_function_call_arguments_delta(event),
     }
+
+    session_id = None
+    last_audio_speech = None
     
     def __init__(self):
         self.clear()
@@ -300,6 +303,7 @@ class RealtimeConversation:
             start_index = (speech['audio_start_ms'] * self.default_frequency) // 1000
             end_index = (speech['audio_end_ms'] * self.default_frequency) // 1000
             speech['audio'] = input_audio_buffer[start_index:end_index]
+            self.last_audio_speech = input_audio_buffer
         return None, None
 
     def _process_response_created(self, event):
@@ -453,6 +457,7 @@ class RealtimeClient(RealtimeEventHandler):
 
     def _on_session_created(self, event):
         self.session_created = True
+        self.conversation.session_id = event['session']['id']
 
     def _process_event(self, event, *args):
         item, delta = self.conversation.process_event(event, *args)
@@ -484,6 +489,8 @@ class RealtimeClient(RealtimeEventHandler):
         try:
             # print(tool["arguments"])
             json_arguments = json.loads(tool["arguments"])
+            json_arguments['session_id'] = self.conversation.session_id
+            json_arguments['last_audio_speech'] = self.conversation.last_audio_speech
             tool_name = tool["name"]
             # tool_config = self.tools.get(tool_name)
             # if not tool_config:
