@@ -101,12 +101,15 @@ def validate_user_openai(transcript: str):
 		stream=False
 	)
 	return completion.choices[0].message.content
-		
+
 def from_file(filename: str):
 	# Transcribe the audio file
-	subscription = os.environ.get("SPEECH_KEY")
-	region = os.environ.get("SPEECH_REGION")
-	speech_config = speechsdk.SpeechConfig(subscription=subscription, region=region)
+	credential = DefaultAzureCredential()
+	aad_token = credential.get_token("https://cognitiveservices.azure.com/")
+	region = os.environ.get("SPEECH_SERVICE_REGION")	
+	# You need to include the "aad#" prefix and the "#" (hash) separator between resource ID and Microsoft Entra access token.
+	authorization_token = "aad#" + os.environ.get("SPEECH_SERVICE_RESOURCE_ID") + "#" + aad_token.token
+	speech_config = speechsdk.SpeechConfig(auth_token=authorization_token, region=region)
 	audio_config = speechsdk.AudioConfig(filename=filename)
 	speech_recognizer = speechsdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_config, language=os.getenv("SPEECH_LANGUAGE"))
 	print(f"Transcript start")

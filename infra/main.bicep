@@ -14,6 +14,10 @@ param environmentName string
 param location string
 param searchServiceLocation string = 'eastus'
 param appExists bool
+param reuseOpenAI bool = false
+param azureOpenaiResourceGroupName string = 'rg-infra'
+param azureOpenaiResourceName string = 'emea-aigbb-demos-oai'
+param speech_language string = 'es-ES'
 
 @description('Whether the deployment is running on GitHub Actions')
 param runningOnGh string = ''
@@ -94,7 +98,7 @@ var realtimeDeployment =    [{
 
 var openAiDeployments = empty(openAiRealtimeName) ?  concat(realtimeDeployment, embeddingDeployment) : embeddingDeployment
 
-module openAi 'br/public:avm/res/cognitive-services/account:0.8.0' = {
+module openAiNew 'br/public:avm/res/cognitive-services/account:0.8.0' = if (!reuseOpenAI) {
   name: 'openai'
   scope: resGroup
   params: {
@@ -120,6 +124,14 @@ module openAi 'br/public:avm/res/cognitive-services/account:0.8.0' = {
         principalType: principalType
       }
     ]
+  }
+}
+
+module openAiExisting './modules/reuse/openai.bicep' = if (reuseOpenAI){
+  scope: resourceGroup(azureOpenaiResourceGroupName)
+  name: azureOpenaiResourceName
+  params: {
+    azureOpenaiResourceName: azureOpenaiResourceName
   }
 }
 
@@ -340,7 +352,7 @@ module getExperimentUrl 'modules/logicapp/retrieve_http_trigger.bicep' = {
 
 var openAiEndpoint = !empty(openAiRealtimeName)
   ? 'https://${openAiRealtimeName}.openai.azure.com'
-  : openAi.outputs.endpoint
+  :  reuseOpenAI ? openAiExisting.outputs.openaiEndpoint : openAiNew.outputs.endpoint
 module app 'modules/app/containerapp.bicep' = {
   name: 'app'
   scope: resGroup
@@ -356,6 +368,7 @@ module app 'modules/app/containerapp.bicep' = {
       APPLICATIONINSIGHTS_CONNECTION_STRING: monitoring.outputs.appInsightsConnectionString
       AZURE_OPENAI_ENDPOINT: openAiEndpoint
       AZURE_OPENAI_DEPLOYMENT: 'gpt-4o-realtime-preview'
+      AZURE_OPENAI_CHAT_DEPLOYMENT: 'gpt-4o'
       AZURE_SEARCH_ENDPOINT: 'https://${searchService.outputs.name}.search.windows.net'
       AZURE_SEARCH_INDEX: searchIndexName
       SEND_EMAIL_LOGIC_APP_URL: sendMailUrl.outputs.url
@@ -364,6 +377,9 @@ module app 'modules/app/containerapp.bicep' = {
       COSMOSDB_ENDPOINT: cosmosdb.outputs.cosmosDbEndpoint
       COSMOSDB_DATABASE: cosmosdb.outputs.cosmosDbDatabase
       COSMOSDB_CONTAINER: cosmosdb.outputs.cosmosDbContainer
+      SPEECH_SERVICE_RESOURCE_ID: cognitiveService.outputs.cognitiveServiceId
+      SPEECH_SERVICE_REGION: cognitiveService.outputs.cognitiveServiceRegion
+      SPEECH_LANGUAGE: speech_language
     },
     empty(openAiRealtimeName) ? {} : {
       AZURE_OPENAI_API_KEY: openAiRealtimeKey
@@ -474,6 +490,25 @@ module storage 'br/public:avm/res/storage/storage-account:0.9.1' = {
   }
 }
 
+module cognitiveService './modules/cogservices/cogservices.bicep' = {
+  name: 'cognitiveService'
+  scope: resGroup
+  params: {
+    location: location
+    resourceName: 'cog-${resourceToken}'
+  }
+}
+
+var roleDefinitionId = 'f2dc8367-1007-4938-bd23-fe263f013447'
+var roleAssignmentName = guid(resourceToken, roleDefinitionId)
+resource cognitiveServiceRoleAssignment2 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: roleAssignmentName
+  properties: {
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
+    principalId: appIdentity.outputs.principalId
+  }
+}
+
 // OUTPUTS will be saved in azd env for later use
 output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
@@ -481,7 +516,7 @@ output AZURE_RESOURCE_GROUP string = resGroup.name
 output AZURE_USER_ASSIGNED_IDENTITY_ID string = appIdentity.outputs.identityId
 
 output AZURE_OPENAI_ENDPOINT string = openAiEndpoint
-output AZURE_OPENAI_EMBEDDING_ENDPOINT string = openAi.outputs.endpoint
+output AZURE_OPENAI_EMBEDDING_ENDPOINT string = reuseOpenAI ? openAiExisting.outputs.openaiEndpoint : openAiNew.outputs.endpoint
 output AZURE_OPENAI_EMBEDDING_DEPLOYMENT string = embedModel
 output AZURE_OPENAI_EMBEDDING_MODEL string = embedModel
 output AZURE_OPENAI_DEPLOYMENT string = aoaiGpt4ModelName
@@ -501,3 +536,7 @@ output AZURE_CONTAINER_REGISTRY_ENDPOINT string = registry.outputs.loginServer
 output SEND_EMAIL_LOGIC_APP_URL string = sendMailUrl.outputs.url
 output UPDATE_RESULTS_LOGIC_APP_URL string = updateExperimentUrl.outputs.url
 output GET_RESULTS_LOGIC_APP_URL string = getExperimentUrl.outputs.url
+
+output AZURE_COGNITIVE_SERVICE_ENDPOINT string = cognitiveService.outputs.cognitiveServiceEndpoint
+output AZURE_COGNITIVE_SERVICE_NAME string = cognitiveService.outputs.cognitiveServiceName
+output AZURE_COGNITIVE_SERVICE_ID string = cognitiveService.outputs.cognitiveServiceId

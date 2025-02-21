@@ -5,12 +5,10 @@ root_assistant = {
     - You need to greet the User.
     - You need to check if User has any additional questions.
     - You need to close the conversation after the User's request has been resolved.
-    - You need to validate the user identity before performing tasks.
     DO NOT CALL THIS IF:  
     - You need to fetch information from the knowledge base.
     - You need to send an email to the specified user.
     - You need to update the experiment results.
-    - You need to validate the user identity.
     """,
     "system_message": """You are a lab assistant that responds to users inquiries.
     Keep sentences short and simple, suitable for a voice conversation, so it's *super* important that answers are as short as possible. Use professional language.

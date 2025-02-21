@@ -67,7 +67,8 @@ class AssistantService:
         self.agents["root"] = self.agents[root_agent['id']] = root_agent
 
     async def get_tool_response(self, tool_name, parameters, call_id):
-        print(f"getToolResponse: tool_name={tool_name}, parameters={parameters}, call_id={call_id}")
+        # print(f"getToolResponse: tool_name={tool_name}, parameters={parameters}, call_id={call_id}")
+        print(f"getToolResponse: tool_name={tool_name}, call_id={call_id}")
         
         # Invoked tool is either a real tool or an agent
         all_tools = [tool for ag in self.agents.values() for tool in ag['tools']]
