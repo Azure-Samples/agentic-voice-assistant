@@ -27,6 +27,7 @@ It works alongside you on your research, keeping you efficient and safe.
 - Update the status of experiment 3 by James Brown to Success. You can validate the record has been updated in CosmosDB experiments container - see ![SQL Statement](./docs/sample_queries/get_experiments.sql)
 - Summarise the record keeping instructions and send them via email to "\<your email>"
 
+
 ## How to deploy
 
 ### Depenendencies
@@ -44,6 +45,11 @@ git clone https://github.com/Azure-Samples/agentic-voice-assistant.git
 cd agentic-voice-assistant
 azd up
 ```
+### Update: added optional Web Search Agent that uses Bing Search API to enable up-to-date information retrieval.
+- as current limitation of provisioning Bing Search resource in Azure, the bicep file does not include the Bing Search resource provisioning, so you need to have an existing Bing Search resource in your Azure subscription and be able to access the API key.
+- you will be asked to provide your Bing Search API key after executing `azd up`
+- new questions can be asked using voice like "what is the latest news about XXX?"
+- If you do not have a Bing Search API key, just press "Enter" when prompted during deployment.
 
 >[!NOTE]
 >Once deployed, you need to authorise the solution to use your M365 email account for the outbound email capability.

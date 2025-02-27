@@ -36,6 +36,14 @@ param resourceGroupName string = ''
 @description('Tags to be applied to resources.')
 param tags object = { 'azd-env-name': environmentName }
 
+// Add new parameters for Bing Search API to replace dynamic loadJsonContent calls
+@secure()
+@description('Bing Search API Key')
+param bingSearchApiKey string
+
+@description('Bing Search API Endpoint')
+param bingSearchApiEndpoint string = 'https://api.bing.microsoft.com/v7.0/search'
+
 // Load abbreviations from JSON file
 var abbrs = loadJsonContent('./abbreviations.json')
 // Generate a unique token for resources
@@ -364,6 +372,8 @@ module app 'modules/app/containerapp.bicep' = {
       COSMOSDB_ENDPOINT: cosmosdb.outputs.cosmosDbEndpoint
       COSMOSDB_DATABASE: cosmosdb.outputs.cosmosDbDatabase
       COSMOSDB_CONTAINER: cosmosdb.outputs.cosmosDbContainer
+      BING_SEARCH_API_ENDPOINT: bingSearchApiEndpoint
+      BING_SEARCH_API_KEY: bingSearchApiKey
     },
     empty(openAiRealtimeName) ? {} : {
       AZURE_OPENAI_API_KEY: openAiRealtimeKey
