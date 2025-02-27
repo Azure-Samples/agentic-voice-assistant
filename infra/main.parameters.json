@@ -20,6 +20,9 @@
     "openAiRealtimeKey": {
       "value": "${AZURE_OPENAI_REALTIME_KEY}"
     },
+    "bingSearchApiKey": {
+      "value": "${AZURE_BING_SEARCH_API_KEY}"
+    },
     "appExists": {
       "value": "${SERVICE_APP_RESOURCE_EXISTS=false}"
     }
