@@ -6,7 +6,7 @@ azure-search-documents==11.6.0b4
     # via openai-realtime-agents (pyproject.toml)
 azure-storage-blob==12.23.1
     # via openai-realtime-agents (pyproject.toml)
-chainlit==2.0rc0
+chainlit==2.9.4
     # via openai-realtime-agents (pyproject.toml)
 invoke==2.2.0
     # via openai-realtime-agents (pyproject.toml)
