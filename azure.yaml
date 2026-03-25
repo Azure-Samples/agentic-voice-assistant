@@ -1,6 +1,6 @@
 name: agentic-voice-demo
 metadata:
-    template: azd-init@1.4.2
+    template: agentic-voice-assistant@1.4.2
 services:
     app:
         project: src/chainlit
